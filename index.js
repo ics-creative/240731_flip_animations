@@ -21,7 +21,8 @@
         },
       ], {
 
-        duration: 400
+        duration: 400,
+      easing: "cubic-bezier(0.22, 1, 0.36, 1)"
 
       }
     )
@@ -59,7 +60,8 @@
             translate: "0 0",
           },
         ], {
-          duration: 400
+          duration: 400,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)"
         }
       )
     })
@@ -99,7 +101,8 @@
           height: `${next.height}px`
         },
       ], {
-        duration: 200
+        duration: 200,
+      easing: "cubic-bezier(0.22, 1, 0.36, 1)"
       }
     )
   }
