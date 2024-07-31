@@ -101,8 +101,8 @@
           height: `${next.height}px`
         },
       ], {
-        duration: 200,
-      easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+        duration: 300,
+      easing: "cubic-bezier(0.33, 1, 0.68, 1)"
       }
     )
   }
