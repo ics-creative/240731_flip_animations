@@ -1,0 +1,32 @@
+.container {
+  border: 2px solid #333;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background: aquamarine;
+}
+
+.anim-button {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+#section1 {
+  .box.active {
+    margin-left: auto;
+  }
+}
+
+#section2 {
+  .container {
+    padding: 16px;
+    height: 350px;
+    display: flex;
+    gap: 8px
+  }
+  .container.active {
+    flex-direction: column;
+  }
+}
