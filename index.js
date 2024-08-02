@@ -129,16 +129,72 @@
 let data = [
   {id: 1, color: "red"},
   {id: 2, color: "blue"},
-  {id: 3, color: "green"}
+  {id: 3, color: "green"},
+  {id: 4, color: "red"},
+  {id: 5, color: "blue"},
+  {id: 6, color: "green"}
 ]
 /* セクション4：リストのデモ */
 const setupSection4 = () => {
   const section4 = document.getElementById("section4")
   const addButton = section4.querySelector(".add-button")
   const container = section4.querySelector(".container")
+  const inputs = document.querySelectorAll("input[name=color]")
+  inputs.forEach(input => {
+    input.addEventListener("change", () => {
+      const boxes = section4.querySelectorAll(".box")
+      const copy = [...boxes]
+      const activeColors = [...inputs].map(input => {
+        if (input.checked) {
+          return input.value
+        }
+      })
+      const filtered = data.filter(d => activeColors.includes(d.color))
 
+      // 1. スタイルを取得
+      const prev = filtered.map((d, index) => {
+          const id = d.id.toString()
+          const box = copy.find(el => el.dataset.id === id.toString())
+          if (!box) {
+            return
+          }
+          return {
+            id,
+            style: box.getBoundingClientRect()
+          }
+        }
+      ).filter(d => !!d)
+      // 2. スタイルを変更
+      boxes.forEach(box => {
+        box.remove()
+      })
 
+      filtered.forEach(d => {
+        // boxの追加 TODO 処理を切り出す
+        const box = document.createElement("div")
+        box.classList.add("box")
+        box.setAttribute("data-color", d.color)
+        box.setAttribute("data-id", d.id)
+        container.appendChild(box)
 
+        const next = box.getBoundingClientRect()
+        const currentPrev = prev.find(data => data.id === d.id.toString())
+        if (!currentPrev) {
+          return
+        }
+        box.animate([{
+          translate: `${currentPrev.style.x - next.x}px ${currentPrev.style.y - next.y}px`,
+        },
+          {
+            translate: "0 0",
+          },
+        ], {
+          duration: 400,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+        })
+      })
+    })
+  })
 
   addButton.addEventListener("click", () => {
     const boxes = document.querySelectorAll(".box")
@@ -180,10 +236,10 @@ const setupSection4 = () => {
         const box = [...document.querySelectorAll(".box")].find(el => el.dataset.id === id)
         const next = box.getBoundingClientRect()
         const currentPrev = prev.find(data => data.id === id)
-        if(!currentPrev){
+        if (!currentPrev) {
           return
         }
-        box.animate([        {
+        box.animate([{
           translate: `${currentPrev.style.x - next.x}px ${currentPrev.style.y - next.y}px`,
         },
           {
