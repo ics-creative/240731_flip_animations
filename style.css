@@ -117,3 +117,21 @@ section {
     }
   }
 }
+
+#section4 {
+  .container {
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .box[data-color="red"]{
+    background: red;
+  }
+  .box[data-color="blue"]{
+    background: blue;
+  }
+  .box[data-color="green"]{
+    background: green;
+  }
+}
