@@ -126,6 +126,9 @@
   })
 })();
 
+/* セクション4：リストのデモ */
+(() => {
+
 let data = [
   {id: 1, color: "red"},
   {id: 2, color: "blue"},
@@ -134,12 +137,10 @@ let data = [
   {id: 5, color: "blue"},
   {id: 6, color: "green"}
 ]
-/* セクション4：リストのデモ */
-const setupSection4 = () => {
   const section4 = document.getElementById("section4")
   const addButton = section4.querySelector(".add-button")
   const container = section4.querySelector(".container")
-  const inputs = document.querySelectorAll("input[name=color]")
+  const inputs = section4.querySelectorAll("input[name=color]")
   inputs.forEach(input => {
     input.addEventListener("change", () => {
       const boxes = section4.querySelectorAll(".box")
@@ -197,7 +198,7 @@ const setupSection4 = () => {
   })
 
   addButton.addEventListener("click", () => {
-    const boxes = document.querySelectorAll(".box")
+    const boxes = section4.querySelectorAll(".box")
     const copy = [...boxes]
     // 1. スタイルを取得
     const prev = data.map((d, index) => {
@@ -233,7 +234,7 @@ const setupSection4 = () => {
     // 3. スタイルを取得
     data.forEach((d, index) => {
         const id = d.id.toString()
-        const box = [...document.querySelectorAll(".box")].find(el => el.dataset.id === id)
+        const box = [...section4.querySelectorAll(".box")].find(el => el.dataset.id === id)
         const next = box.getBoundingClientRect()
         const currentPrev = prev.find(data => data.id === id)
         if (!currentPrev) {
@@ -253,5 +254,4 @@ const setupSection4 = () => {
     )
 
   })
-}
-setupSection4()
+})()
