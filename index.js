@@ -1,6 +1,9 @@
 /* セクション1：transformのデモ */
 (() => {
   const section1 = document.getElementById("section1")
+  if(!section1){
+    return
+  }
   const box = section1.querySelector(".box")
   const button = section1.querySelector(".anim-button")
 
@@ -33,6 +36,9 @@
 /* セクション2：flex-directionのデモ */
 (() => {
   const section2 = document.getElementById("section2")
+  if(!section2){
+    return
+  }
   const container = section2.querySelector(".container")
   const boxes = section2.querySelectorAll(".box")
   const button = section2.querySelector(".anim-button")
@@ -71,6 +77,9 @@
 /* セクション3：ネストしたオブジェクト */
 (() => {
   const section3 = document.getElementById("section3")
+  if(!section3){
+    return
+  }
   const button = section3.querySelector(".anim-button")
   const card = section3.querySelector(".card")
   const image = card.querySelector(".img")
@@ -138,6 +147,9 @@ let data = [
   {id: 6, color: "green"}
 ]
   const section4 = document.getElementById("section4")
+  if(!section4){
+    return
+  }
   const addButton = section4.querySelector(".add-button")
   const container = section4.querySelector(".container")
   const inputs = section4.querySelectorAll("input[name=color]")

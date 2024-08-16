@@ -1,0 +1,65 @@
+body {
+  background: #202020;
+}
+.container {
+  margin: 40px auto;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(4, 200px);
+  gap: 24px;
+  img {
+    cursor: pointer;
+  }
+}
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+  }
+  .popover {
+    width: 50%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    gap: 24px;
+    position: relative;
+    justify-content: space-between;
+    padding: 96px 0;
+    .popover-text{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 12px;
+      gap: 36px;
+      background: rgba(255, 255, 255, 0.5);
+      p {
+        line-height: 1.6;
+      };
+      button {
+        width: 80%;
+        font-size: 18px;
+        border-radius: 4px;
+        border: 1px solid #fff;
+        text-align: center;
+    }}
+    img {
+      width: 100%;
+      height: auto;
+      transform-origin: top left;
+    }
+    .popover-text.hidden {
+      display: none;
+    }
+  }
+}
+.card.hidden {
+  display: none;
+}

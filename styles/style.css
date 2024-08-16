@@ -2,7 +2,7 @@ body {
   padding: 24px;
 }
 
-button {
+button, label {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,9 +38,12 @@ button:focus {
 
 section {
   margin-top: 40px;
+  h2 {
+    margin-bottom: 8px;
+  }
 }
 
-.anim-button {
+.anim-button, .add-button {
   font-size: 16px;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -66,9 +69,7 @@ section {
 }
 
 #section3 {
-  h2 {
-    margin-bottom: 8px;
-  }
+
   .container {
     padding: 16px;
     min-height: 350px;
@@ -124,6 +125,30 @@ section {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+  }
+  .toolbar{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  input {
+    display: none;
+  }
+  label {
+    opacity: 0.5;
+  }
+  label:has(input:checked){
+    opacity: 1;
+  }
+  label:has(input[value=red]){
+    background: red;
+  }
+  label:has(input[value=green]){
+    background: green;
+  }
+  label:has(input[value=blue]){
+    background: blue;
   }
   .box[data-color="red"]{
     background: red;
