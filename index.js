@@ -45,22 +45,26 @@
 
   button.addEventListener("click", () => {
 
-    const prev = [...boxes].map(box => {
-      // 1. スタイルを取得
-      const prev = box.getBoundingClientRect()
-      return prev
+    const prevMap = new Map();
+    boxes.forEach((box) => {
+      const id = box.dataset.id
+      const style = box.getBoundingClientRect()
+      prevMap.set(id, style)
     })
+
     // 2. スタイルを変更
     container.classList.toggle("active")
 
     // すべてのboxに対してアニメーションを適用する
-    boxes.forEach((box, index) => {
+    boxes.forEach((box) => {
       // 3. スタイルを取得
       const next = box.getBoundingClientRect()
+      const id = box.dataset.id
+      const prev = prevMap.get(id)
       // 4. アニメーションを適用
       box.animate([
           {
-            translate: `${prev[index].x - next.x}px ${prev[index].y - next.y}px`,
+            translate: `${prev.x - next.x}px ${prev.y - next.y}px`,
           },
           {
             translate: "0 0",
@@ -138,65 +142,47 @@
 /* セクション4：リストのデモ */
 (() => {
 
-let data = [
-  {id: 1, color: "red"},
-  {id: 2, color: "blue"},
-  {id: 3, color: "green"},
-  {id: 4, color: "red"},
-  {id: 5, color: "blue"},
-  {id: 6, color: "green"}
-]
+
   const section4 = document.getElementById("section4")
   if(!section4){
     return
   }
-  const addButton = section4.querySelector(".add-button")
   const container = section4.querySelector(".container")
   const inputs = section4.querySelectorAll("input[name=color]")
   inputs.forEach(input => {
     input.addEventListener("change", () => {
       const boxes = section4.querySelectorAll(".box")
-      const copy = [...boxes]
-      const activeColors = [...inputs].map(input => {
-        if (input.checked) {
-          return input.value
-        }
-      })
-      const filtered = data.filter(d => activeColors.includes(d.color))
+      // 選択中の色を取得
+      const colors  = [...inputs].filter(input => input.checked).map(input => input.value)
 
       // 1. スタイルを取得
-      const prev = filtered.map((d, index) => {
-          const id = d.id.toString()
-          const box = copy.find(el => el.dataset.id === id.toString())
-          if (!box) {
-            return
-          }
-          return {
-            id,
-            style: box.getBoundingClientRect()
-          }
+      const prevMap = new Map()
+      boxes.forEach((box) => {
+          const id = box.dataset.id
+          const style = box.getBoundingClientRect()
+          prevMap.set(id, style)
         }
-      ).filter(d => !!d)
+      )
       // 2. スタイルを変更
       boxes.forEach(box => {
-        box.remove()
+        const color = box.dataset.color
+        if (colors.includes(color)) {
+          box.classList.remove("hidden")
+        } else {
+          box.classList.add("hidden")
+        }
       })
 
-      filtered.forEach(d => {
-        // boxの追加 TODO 処理を切り出す
-        const box = document.createElement("div")
-        box.classList.add("box")
-        box.setAttribute("data-color", d.color)
-        box.setAttribute("data-id", d.id)
-        container.appendChild(box)
-
+      boxes.forEach(box => {
         const next = box.getBoundingClientRect()
-        const currentPrev = prev.find(data => data.id === d.id.toString())
-        if (!currentPrev) {
+        const prev = prevMap.get(box.dataset.id)
+        // 出現するboxはFLIPさせずにふわっと表示
+        if(prev.width === 0){
+          box.animate([{opacity: 0}, {opacity: 1}], {duration: 200})
           return
         }
         box.animate([{
-          translate: `${currentPrev.style.x - next.x}px ${currentPrev.style.y - next.y}px`,
+          translate: `${prev.x - next.x}px ${prev.y - next.y}px`,
         },
           {
             translate: "0 0",
@@ -209,61 +195,6 @@ let data = [
     })
   })
 
-  addButton.addEventListener("click", () => {
-    const boxes = section4.querySelectorAll(".box")
-    const copy = [...boxes]
-    // 1. スタイルを取得
-    const prev = data.map((d, index) => {
-        const id = d.id.toString()
-        const box = copy.find(el => el.dataset.id === id)
-        return {
-          id,
-          style: box.getBoundingClientRect()
-        }
-      }
-    )
-    // 2. スタイルを変更
-    boxes.forEach(box => {
-      box.remove()
-    })
-    // 色を設定
-    const colors = ["red", "blue", "green"]
-    const color = colors[Math.floor(Math.random() * colors.length)]
-    const ids = data.map(d => d.id)
-    const maxId = Math.max(...ids)
-    data.unshift({
-      id: maxId + 1,
-      color
-    })
-    data.forEach(d => {
-      // boxの追加 TODO 処理を切り出す
-      const box = document.createElement("div")
-      box.classList.add("box")
-      box.setAttribute("data-color", d.color)
-      box.setAttribute("data-id", d.id)
-      container.appendChild(box)
-    })
-    // 3. スタイルを取得
-    data.forEach((d, index) => {
-        const id = d.id.toString()
-        const box = [...section4.querySelectorAll(".box")].find(el => el.dataset.id === id)
-        const next = box.getBoundingClientRect()
-        const currentPrev = prev.find(data => data.id === id)
-        if (!currentPrev) {
-          return
-        }
-        box.animate([{
-          translate: `${currentPrev.style.x - next.x}px ${currentPrev.style.y - next.y}px`,
-        },
-          {
-            translate: "0 0",
-          },
-        ], {
-          duration: 400,
-          easing: "cubic-bezier(0.22, 1, 0.36, 1)"
-        })
-      }
-    )
 
-  })
+
 })()
