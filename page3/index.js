@@ -7,28 +7,31 @@ const popoverText = card.querySelector(".popover-text")
 let currentId = null
 
 images.forEach(image => {
-  image.addEventListener("click", () => {
-    popoverText.classList.remove("hidden")
-    currentId = image.dataset.id
-    // 1. スタイルを取得
-    const prev = image.getBoundingClientRect()
-    cardImg.src = image.src
-    card.classList.remove("hidden")
-    const next = cardImg.getBoundingClientRect()
-    cardImg.animate([
-      {
-        translate: `${prev.x - next.x}px ${prev.y - next.y}px`,
-        scale: `${prev.width / next.width} ${prev.height / next.height}`
-      },
-      {
-        translate: `0 0`,
-        scale: `1 1`
+  image.addEventListener("click",
+    async () => {
+      popoverText.classList.remove("hidden")
+      currentId = image.dataset.id
+      // 1. スタイルを取得
+      const prev = image.getBoundingClientRect()
+      cardImg.src = image.src
+      cardImg.onload = () => {
+        card.classList.remove("hidden")
+        const next = cardImg.getBoundingClientRect()
+        cardImg.animate([
+          {
+            translate: `${prev.x - next.x}px ${prev.y - next.y}px`,
+            scale: `${prev.width / next.width} ${prev.height / next.height}`
+          },
+          {
+            translate: `0 0`,
+            scale: `1 1`
+          }
+        ], {
+          duration: 600,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+        })
       }
-    ], {
-      duration: 600,
-      easing: "cubic-bezier(0.22, 1, 0.36, 1)"
     })
-  })
 })
 
 const close = card.querySelector(".close")
