@@ -1,0 +1,67 @@
+:root {
+  --color-red: #ff4a12;
+  --color-yellow: #ffc902;
+  --color-blue: #0a008a;
+}
+
+section {
+  margin-top: 40px;
+  h2 {
+    margin-bottom: 24px;
+  }
+}
+
+
+.container {
+  border: 2px solid #333;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  justify-items: center;
+  gap: 16px;
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+  }
+}
+
+.toolbar{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+input {
+  display: none;
+}
+label {
+  opacity: 0.5;
+}
+label:has(input:checked){
+  opacity: 1;
+}
+label:has(input[value=red]){
+  background: var(--color-red);
+}
+label:has(input[value=yellow]){
+  background: var(--color-yellow);
+}
+label:has(input[value=blue]){
+  background: var(--color-blue);
+}
+.box {
+  width: 100%;
+  aspect-ratio: 1;
+}
+.box.hidden {
+  display: none;
+}
+.box[data-color="red"]{
+  background: var(--color-red);
+}
+.box[data-color="blue"]{
+  background: var(--color-blue);
+}
+.box[data-color="yellow"]{
+  background: var(--color-yellow);
+}
