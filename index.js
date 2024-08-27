@@ -147,7 +147,6 @@
   if(!section4){
     return
   }
-  const container = section4.querySelector(".container")
   const inputs = section4.querySelectorAll("input[name=color]")
   inputs.forEach(input => {
     input.addEventListener("change", () => {
@@ -174,6 +173,7 @@
       })
 
       boxes.forEach(box => {
+        // 3. スタイルを取得
         const next = box.getBoundingClientRect()
         const prev = prevMap.get(box.dataset.id)
         // 出現するboxはFLIPさせずにふわっと表示
@@ -181,6 +181,7 @@
           box.animate([{opacity: 0}, {opacity: 1}], {duration: 200})
           return
         }
+        // 4. アニメーションを適用
         box.animate([{
           translate: `${prev.x - next.x}px ${prev.y - next.y}px`,
         },

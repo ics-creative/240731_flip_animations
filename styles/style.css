@@ -1,9 +1,14 @@
 :root {
   --base-color: #7C71F6;
+  --color-red: #ff4a12;
+  --color-yellow: #ffc902;
+  --color-blue: #0a008a;
 }
 
 body {
   padding: 24px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 button, label {
@@ -42,6 +47,9 @@ button:focus {
 
 section {
   margin-top: 40px;
+  .container {
+    padding: 16px;
+  }
   h2 {
     margin-bottom: 8px;
   }
@@ -81,7 +89,7 @@ section {
 
   .card {
     padding: 16px;
-    background: #A9ACFF;
+    background: #d3d4ff;
     border-radius: 8px;
     display: grid;
     grid-template-columns: 48px auto;
@@ -126,9 +134,13 @@ section {
 #section4 {
   .container {
     padding: 16px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    justify-items: center;
     gap: 16px;
-    flex-wrap: wrap;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    }
   }
   .toolbar{
     display: flex;
@@ -149,21 +161,21 @@ section {
     opacity: 1;
   }
   label:has(input[value=red]){
-    background: red;
+    background: var(--color-red);
   }
-  label:has(input[value=green]){
-    background: green;
+  label:has(input[value=yellow]){
+    background: var(--color-yellow);
   }
   label:has(input[value=blue]){
-    background: blue;
+    background: var(--color-blue);
   }
   .box[data-color="red"]{
-    background: red;
+    background: var(--color-red);
   }
   .box[data-color="blue"]{
-    background: blue;
+    background: var(--color-blue);
   }
-  .box[data-color="green"]{
-    background: green;
+  .box[data-color="yellow"]{
+    background: var(--color-yellow);
   }
 }

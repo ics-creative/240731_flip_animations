@@ -1,24 +1,37 @@
 body {
   background: #202020;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 0;
+  @media (max-width: 768px) {
+    padding: 24px;
+  }
+  h1 {
+    color: #fff;
+  }
 }
 .container {
   margin: 40px auto;
   display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(4, 200px);
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   img {
     cursor: pointer;
   }
 }
 .card {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
   .bg {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
@@ -33,15 +46,21 @@ body {
     position: relative;
     justify-content: space-between;
     padding: 96px 0;
+    @media (max-width: 768px) {
+      width: 80%;
+      grid-template-columns: 1fr;
+      padding: 24px 0;
+    }
     .popover-text{
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 24px 12px;
       gap: 36px;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.8);
       p {
         line-height: 1.6;
+        font-size: 16px;
       };
       button {
         width: 80%;
