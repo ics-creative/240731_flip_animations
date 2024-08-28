@@ -39,6 +39,7 @@ body {
   }
   .popover {
     width: 50%;
+    max-width: 720px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 50% 1fr;
