@@ -101,7 +101,7 @@
    * @example
    * animate(element, { x: 100, y: 100, width: 200, height: 200 }, { x: 200, y: 200, width: 300, height: 300 });
    */
-  const animate = (el, prev, next) => {
+  const flip = (el, prev, next) => {
     el.animate([
         {
           translate: `${prev.x - next.x}px ${prev.y - next.y}px`,
@@ -132,9 +132,9 @@
     const nextImage = image.getBoundingClientRect()
     const nextName = name.getBoundingClientRect()
     // 4. アニメーションを適用
-    animate(card, prevCard, nextCard)
-    animate(image, prevImage, nextImage)
-    animate(name, prevName, nextName)
+    flip(card, prevCard, nextCard)
+    flip(image, prevImage, nextImage)
+    flip(name, prevName, nextName)
     text.animate([{opacity: 0}, {opacity: 1}], {duration: 200})
   })
 })();
