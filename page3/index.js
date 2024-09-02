@@ -3,13 +3,13 @@ const images = container.querySelectorAll("img")
 const card = document.querySelector(".card")
 const cardImg = card.querySelector("img")
 const popoverText = card.querySelector(".popover-text")
+const bg = card.querySelector(".bg")
 
 let currentId = null
 
 images.forEach(image => {
   image.addEventListener("click",
     async () => {
-      popoverText.classList.remove("hidden")
       currentId = image.dataset.id
       // 1. スタイルを取得
       const prev = image.getBoundingClientRect()
@@ -33,6 +33,8 @@ images.forEach(image => {
           duration: 600,
           easing: "cubic-bezier(0.22, 1, 0.36, 1)"
         })
+        bg.classList.remove("hidden")
+        popoverText.classList.remove("hidden")
       }
     })
 })
@@ -55,6 +57,7 @@ close.addEventListener("click", () => {
     duration: 600,
     easing: "cubic-bezier(0.25, 1, 0.5, 1)"
   })
+  bg.classList.add("hidden")
   animation.onfinish = () => {
     card.classList.add("hidden")
     cardImg.src = ""
