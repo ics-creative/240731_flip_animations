@@ -13,10 +13,13 @@ images.forEach(image => {
       currentId = image.dataset.id
       // 1. スタイルを取得
       const prev = image.getBoundingClientRect()
+      // 2. スタイルを変更
       cardImg.src = image.src
       cardImg.onload = () => {
         card.classList.remove("hidden")
+        // 3. スタイルを取得
         const next = cardImg.getBoundingClientRect()
+        // 4. アニメーションを適用
         cardImg.animate([
           {
             translate: `${prev.x - next.x}px ${prev.y - next.y}px`,
@@ -40,7 +43,9 @@ close.addEventListener("click", () => {
   // 1. スタイルを取得
   const img = [...images].find(image => image.dataset.id === currentId);
   const prev = cardImg.getBoundingClientRect()
+  // 3. スタイルを取得（変更先のスタイルが確定しているので、2は省略）
   const next = img.getBoundingClientRect()
+  // 4. アニメーションを適用
   const animation = cardImg.animate([
     {
       scale: `${next.width / prev.width} ${next.height / prev.height}`,

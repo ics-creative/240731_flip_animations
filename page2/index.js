@@ -7,7 +7,7 @@ colorCheckBoxes.forEach(input => {
 
     // 選択中の色を取得
     // 例：["red", "blue"]
-    const colors  = [...colorCheckBoxes]
+    const colors = [...colorCheckBoxes]
       .filter(checkbox => checkbox.checked)
       .map(input => input.value);
 
@@ -21,13 +21,8 @@ colorCheckBoxes.forEach(input => {
     )
     // 2. スタイルを変更
     boxes.forEach(box => {
-      const color = box.dataset.color
-      if (colors.includes(color)) {
-        box.classList.remove("hidden")
-      } else {
-        box.classList.add("hidden")
-      }
-    })
+      box.classList.toggle("hidden", !colors.includes(box.dataset.color));
+    });
 
     boxes.forEach(box => {
       // 3. スタイルを取得
