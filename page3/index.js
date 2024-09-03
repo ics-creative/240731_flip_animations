@@ -17,6 +17,7 @@ images.forEach(image => {
       cardImg.src = image.src
       cardImg.onload = () => {
         card.classList.remove("hidden")
+        card.scrollTo(0, 0)
         // 3. スタイルを取得
         const next = cardImg.getBoundingClientRect()
         // 4. アニメーションを適用
@@ -58,7 +59,6 @@ close.addEventListener("click", () => {
     easing: "cubic-bezier(0.25, 1, 0.5, 1)"
   })
   bg.classList.add("hidden")
-  card.scrollTo(0, 0)
   animation.onfinish = () => {
     card.classList.add("hidden")
     cardImg.src = ""
