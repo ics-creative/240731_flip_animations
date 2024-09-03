@@ -59,8 +59,8 @@ close.addEventListener("click", () => {
   })
   bg.classList.add("hidden")
   animation.onfinish = () => {
+    card.scrollTo(0, 0)
     card.classList.add("hidden")
     cardImg.src = ""
-    card.scrollTo(0, 0)
   }
 })
