@@ -2,6 +2,7 @@ const container = document.querySelector(".container")
 const images = container.querySelectorAll("img")
 const card = document.querySelector(".card")
 const cardImg = card.querySelector("img")
+const popover = card.querySelector(".popover")
 const popoverText = card.querySelector(".popover-text")
 const bg = card.querySelector(".bg")
 
@@ -17,7 +18,7 @@ images.forEach(image => {
       cardImg.src = image.src
       cardImg.onload = () => {
         card.classList.remove("hidden")
-        card.scrollTo(0, 0)
+        popover.scrollIntoView()
         // 3. スタイルを取得
         const next = cardImg.getBoundingClientRect()
         // 4. アニメーションを適用
